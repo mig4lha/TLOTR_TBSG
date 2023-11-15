@@ -2,7 +2,7 @@
 #include <string.h>
 
 //17 rows and 26 columns
-//37    53
+//37    55
 
 // Function declarations
 void constructGrid();
@@ -11,50 +11,21 @@ void testAround();
 // Variable/Constants declarations
 
 int main() {
-	char grid[37][53][1];
+	char grid[37][55][1];
 	int i, j;
 	for ( i = 0; i < 37; i++)
 	{
-		for ( j = 0;  j < 53;  j++)
+		for ( j = 0;  j < 55;  j++)
 		{
 			grid[i][j][0] = 32;
 		}
-	}
+	}	
 
-	/*char t[8] = {
-		[-1, -1]
-	};*/
-
-
-	//t[0] = 218;
-
-	/*if (t[0] != "")
-	{
-		printf("%c", t[0]);
-	}*/
-
-	/*int AROUND_CELL_OPERATORS[8][2] = {
-		{-1, -1},
-		{-1, 0},
-		{-1, 1},
-		{0, -1},
-		{0, 1},
-		{1, -1},
-		{1, 0},
-		{1, 1}
-	};
-
-	int num_operators = sizeof(AROUND_CELL_OPERATORS) / sizeof(AROUND_CELL_OPERATORS[0]);
-
-	printf("%d", num_operators);*/
-
-	
-
-	constructGrid(grid, 37, 53, 1);
+	constructGrid(grid, 37, 55, 1);
 	
 	for (i = 0; i < 37; i++)
 	{
-		for (j = 0; j < 53; j++)
+		for (j = 0; j < 55; j++)
 		{
 			// é para imprimir os valores de 10 a 16 nas coordenadas
 			if (grid[i][j][0] > '9' && grid[i][j][0] < 'A')
@@ -66,7 +37,7 @@ int main() {
 			{
 				printf("%c", grid[i][j][0]);
 			}
-			// imprimir o resto das coordernadas e grid
+			// imprimir o resto das coordernadas (0 a 9) e grid
 			else 
 			{
 				printf("%c", grid[i][j][0]);
@@ -76,92 +47,114 @@ int main() {
 		printf("\n");
 	}
 
-	/*for ( i = 20; i < 34; i+=2)
-	{
-		grid[i][0][0] = i;
-		printf("%c", grid[i][0][0]);
-	}*/
-
 	return 0;
 }
 
-void testAround(char grid[37][53][1], int x, int y, char valor) {
-	/* pre view of around cell operators
-	{
-		{-1, -1}, {-1, 0}, {-1, 1},
-		{0, -1},           {0, 1},
-		{1, -1}, {1, 0}, {1, 1}
-	};
-	*/
-	int AROUND_CELL_OPERATORS[8][2] = {
-		{-1, -1},
-		{-1, 0},
-		{-1, 1},
-		{0, -1},
-		{0, 1},
-		{1, -1},
-		{1, 0},
-		{1, 1}
-	};
-
-	int i, j=0;
-
-	int num_rows = sizeof(AROUND_CELL_OPERATORS) / sizeof(AROUND_CELL_OPERATORS[0]);
-
-	for ( i = 0; i < num_rows; i++)
-	{
-		if (grid[x][y][0] == 0)
-		{
-			printf("calate");
-		}
-	}
-
-	
-}
-
-void constructGrid(char grid[37][53][1], int linha, int coluna, char valor) {
+void constructGrid(char grid[37][55][1], int linha, int coluna, char valor) {
 	int i, j;
 	int ii = 0;
 	int jj = 0;
-
-	for ( i = 4, j = 0, ii =48; i < 37-2; i+=2)
+	
+	//coordernada vertical, 0 1 2...
+	for ( i = 3, j = 0, ii =48; i < 37-1; i+=2)
 	{
 		grid[i][j][0] = ii;
 		ii++;
+
+		// a partir do 10 anulo a celua a sua frente, devido ao espaçamento
+		if (i >= 23)
+		{
+			grid[i][1][0] = 0;
+		}
 	}
 
 	//coordenadas horizontal, A B C....
-	for ( j = 4, i = 0; j < 53-2; j+=2)
+	for ( j = 3, i = 0; j < 55; j+=2)
 	{
 		//printf("%c", 'A' + ii);
 		grid[i][j][0] = 'A' + jj;
 		jj++;
 	}
 
-	
+	for (i = 2; i < linha; i++)
+	{
+		for (j = 2; j < coluna; j++)
+		{
+			if ((i % 2 == 1) && (j % 2 == 1) && (grid[i][j][0] = 32))
+			{
+				grid[i][j][0] = 32;
+			}
+			else
+			{
+				if (i % 2 == 0)
+				{ // linha par
+					if (i == 2) // primeira linha do grid
+					{
+						if (j % 2 == 1)
+						{
+							grid[i][j][0] = 196;
+						}
+						else
+						{
+							grid[i][j][0] = 194;
+						}
+					}
+					else if (i == 36) // ultima linha do grid
+					{
+						if (j % 2 == 1)
+						{
+							grid[i][j][0] = 196;
+						}
+						else
+						{
+							grid[i][j][0] = 193;
+						}
+					}
+					else
+					{
+						if (j % 2 == 1)
+						{
+							grid[i][j][0] = 196;
+						}
+						else
+						{
+							grid[i][j][0] = 197;
+						}
+					}
+				}
+				else
+				{ //linha impar
+					grid[i][j][0] = 179;
+				}
+
+				if (j == 2) // primeira coluna
+				{
+					if (i % 2 == 0) // apenas para alterar linhas entre duas celulas
+					{
+						grid[i][j][0] = 195;
+					}					
+				}
+				else if (j == 54) // ultima coluna
+				{
+					if (i % 2 == 0) // apenas para alterar linhas entre duas celulas
+					{
+						grid[i][j][0] = 180;
+					}
+				}				
+			}
+		}
+	}
 
 	//cantos
 	// superior esq
-	grid[3][3][0] = 218;
+	grid[2][2][0] = 218;
 
 	//superior drt
-	grid[3][coluna-1][0] = 191;
+	grid[2][coluna - 1][0] = 191;
 
 	//inferior esq
-	grid[linha-1][3][0] = 192;
+	grid[linha - 1][2][0] = 192;
 
-	//inferior esq
-	grid[linha-1][coluna-1][0] = 217;
-
-	for (i = 4; i < linha; i += 2)
-	{
-		for (j = 4; j < coluna; j += 2)
-		{
-			// manda as coordenadas da celula vazia, e faz o teste a sua volta 
-			testAround(grid, i, j, 1);
-
-
-		}
-
-	}
+	//inferior drt
+	grid[linha - 1][coluna - 1][0] = 217;
 }
