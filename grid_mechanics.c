@@ -1,180 +1,85 @@
 #include <stdio.h>
 
-//teste de commit na branch leonel
 
 // Function declarations
-void inititializeGrid();
-void insertValuesInGrid();
+void constructGrid();
+void testeVolta();
 
 // Variable/Constants declarations
 
-// Define the Matrix to be used to create the game grid
-struct Matrix {
-    int rows;
-    int cols;
-};
-
 int main() {
+	char grid[38][56][1];
 
-    inititializeGrid(); // Initialize the game grid
+	/*char t[1];
 
-    return 0;
+	t[0] = 218;
+
+	if (t[0] != "")
+	{
+		printf("%c", t[0]);
+	}*/
+
+
+	//constructGrid(grid, 38, 56, 1);
+	return 0;
 }
 
-void insertValuesInGrid() {
+void testeVolta(char grid[38][56][1], int linha, int coluna, char valor) {
+	int i=0, j=0;
+	//int i, j;
 
+	//int teste[8] = {[] }
+
+	if (grid[i][j][0] == "")
+	{
+		printf("calate");
+	}
 }
 
-// Function definitions
-void inititializeGrid() {
-    struct Matrix grid = { 17, 26 }; // <-- Adjust the size of the game grid
+void constructGrid(char grid[38][56][1], int linha, int coluna, char valor) {
+	int i, j = 0;
 
-    char testArray[17][26][1] = {
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","S","E","N","D","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","H","E","L","P","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","P","L","E","A","S","E","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-    };
+	for (i = 0; i < linha; i++)
+	{
+		if (j == 0)
+		{
+			grid[i][j][0] = j + 1;
+		}
 
-    // Accessing row and column information
-    printf("Game Grid Information\n");
-    printf("Rows: %d\n", grid.rows);
-    printf("Cols: %d\n", grid.cols);
-    printf("\n");
+		for (j = 0; j < coluna; j++)
+		{
+			if (i == 0)
+			{
+				grid[i][j][0] = 'A' + j;
+			}
 
-    // Printing a square
-    //printf("%4c", 218); // Upper-Left corner
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 191); // Upper-Right corner
-    //printf("\n");
-    //printf("%4c", 179); // Vertical line
-    //printf("%4c", 179); // Vertical line
-    //printf("\n");
-    //printf("%4c", 192); // Lower-Left corner
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 217); // Lower-Right corner
+		}
+	}
 
-    int counter = 1;
 
-    // Accessing Matrix elements
-    for (int lineCounter = 0; lineCounter <= grid.rows; lineCounter++) {
-        for (int columnCounter = 0; columnCounter <= grid.cols; columnCounter++) {
-            if (lineCounter == 0 && columnCounter == grid.cols) {
-                printf("%c", 191);
-            }
-            else if (lineCounter == grid.rows && columnCounter == 0) {
-                printf("%4c", 192);
-                printf("%c", 196);
-                printf("%c", 196);
-                printf("%c", 196);
-            }
-            else if (lineCounter == grid.rows && columnCounter == grid.cols) {
-                printf("%c", 217);
-            }
-            else if (lineCounter == 0 && columnCounter == 0) {
-                printf("%4c", 218);
-                printf("%c", 196);
-                printf("%c", 196);
-                printf("%c", 196);
-            }
-            else if (lineCounter == 0) {
-                printf("%c", 194);
-                printf("%c", 196);
-                printf("%c", 196);
-                printf("%c", 196);
-            }
-            else if (lineCounter == grid.rows) {
-                printf("%c", 193);
-                printf("%c", 196);
-                printf("%c", 196);
-                printf("%c", 196);
-            }
-            else if (columnCounter == grid.cols) {
-                printf("%c", 180);
-            }
-            else if (columnCounter == 0) {
-                printf("%4c", 195);
-                printf("%c", 196);
-                printf("%c", 196);
-                printf("%c", 196);
-            }
-            else {
-                printf("%c", 197);
-                printf("%c", 196);
-                printf("%c", 196);
-                printf("%c", 196);
-            }
-        }
-        printf("\n");
-        if (lineCounter < grid.rows) {
-            for (size_t i = 0; i < grid.cols; i++)
-            {
-                if (i == 0) {
-                    printf("%4c", 179); // Vertical line
-                    printf("%c", 255);
+	//cantos
+	// superior esq
+	grid[2][2][0] = 218;
 
-                    // Print value here
-                    if (testArray[lineCounter][i][1] == 0) {
-                        printf("%c", 255);
-                    }
-                    else {
-                        printf("%c", testArray[lineCounter][i][1]);
-                    }
-                    // Print value here
+	//superior drt
+	grid[2][coluna][0] = 191;
 
-                    printf("%c", 255); 
-                }
-                else if (i == grid.cols - 1) {
-                    printf("%c", 179); // Vertical line
-                    printf("%c", 255);
+	//inferior esq
+	grid[linha][2][0] = 192;
 
-                    // Print value here
-                    if (testArray[lineCounter][i][1] == 0) {
-                        printf("%c", 255);
-                    }
-                    else {
-                        printf("%c", testArray[lineCounter][i][1]);
-                    }
-                    // Print value here
+	//inferior esq
+	grid[linha][coluna][0] = 217;
 
-                    printf("%c", 255);
-                    printf("%c", 179); // Vertical line
-                }
-                else {
-                    printf("%c", 179); // Vertical line
-                    printf("%c", 255);
 
-                    // Print value here
-                    if (testArray[lineCounter][i][1] == 0) {
-                        printf("%c", 255);
-                    }
-                    else {
-                        printf("%c", testArray[lineCounter][i][1]);
-                    }
-                    // Print value here
+	for (i = 3; i < linha; i += 2)
+	{
+		for (j = 3; j < coluna; j += 2)
+		{
 
-                    printf("%c", 255);
-                }    
-            }
-            printf("\n");
+			testeVolta(grid, 38, 56, 1);
 
-        }
-    }
+
+		}
+
+	}
 }
