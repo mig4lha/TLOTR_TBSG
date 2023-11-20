@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // Function declarations
-void inititializeGrid();
+void initializeGrid();
 void insertValuesInGrid();
 
 // Variable/Constants declarations
@@ -14,19 +14,20 @@ struct Matrix {
 
 int main() {
 
-    inititializeGrid(); // Initialize the game grid
+    initializeGrid(); // Initialize the game grid
 
     return 0;
 }
 
 void insertValuesInGrid() {
-
+    // Function to insert values into the game grid (currently empty)
 }
 
 // Function definitions
-void inititializeGrid() {
+void initializeGrid() {
     struct Matrix grid = { 17, 26 }; // <-- Adjust the size of the game grid
 
+    // Define the game grid with ASCII characters
     char testArray[17][26][1] = {
         {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
         {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
@@ -44,7 +45,7 @@ void inititializeGrid() {
         {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
         {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
         {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
+        {"","","","","","","","","","","","","","","","","","","","","","","A","A","A","A"},
     };
 
     // Accessing row and column information
@@ -52,24 +53,6 @@ void inititializeGrid() {
     printf("Rows: %d\n", grid.rows);
     printf("Cols: %d\n", grid.cols);
     printf("\n");
-
-    // Printing a square
-    //printf("%4c", 218); // Upper-Left corner
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 191); // Upper-Right corner
-    //printf("\n");
-    //printf("%4c", 179); // Vertical line
-    //printf("%4c", 179); // Vertical line
-    //printf("\n");
-    //printf("%4c", 192); // Lower-Left corner
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 196); // Horizontal line
-    //printf("%c", 217); // Lower-Right corner
-
-    int counter = 1;
 
     // Accessing Matrix elements
     for (int lineCounter = 0; lineCounter <= grid.rows; lineCounter++) {
@@ -129,11 +112,11 @@ void inititializeGrid() {
                     printf("%c", 255);
 
                     // Print value here
-                    if (testArray[lineCounter][i][1] == 0) {
+                    if (testArray[lineCounter][i][0] == 0) {
                         printf("%c", 255);
                     }
                     else {
-                        printf("%c", testArray[lineCounter][i][1]);
+                        printf("%c", testArray[lineCounter][i][0]);
                     }
                     // Print value here
 
@@ -144,11 +127,11 @@ void inititializeGrid() {
                     printf("%c", 255);
 
                     // Print value here
-                    if (testArray[lineCounter][i][1] == 0) {
+                    if (testArray[lineCounter][i][0] == 0) {
                         printf("%c", 255);
                     }
                     else {
-                        printf("%c", testArray[lineCounter][i][1]);
+                        printf("%c", testArray[lineCounter][i][0]);
                     }
                     // Print value here
 
@@ -160,11 +143,11 @@ void inititializeGrid() {
                     printf("%c", 255);
 
                     // Print value here
-                    if (testArray[lineCounter][i][1] == 0) {
+                    if (testArray[lineCounter][i][0] == 0) {
                         printf("%c", 255);
                     }
                     else {
-                        printf("%c", testArray[lineCounter][i][1]);
+                        printf("%c", testArray[lineCounter][i][0]);
                     }
                     // Print value here
 
