@@ -54,6 +54,9 @@ void initializeGrid() {
     printf("Cols: %d\n", grid.cols);
     printf("\n");
 
+    // Print column indicators
+    printf("%7cA   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z\n", 255);
+
     // Accessing Matrix elements
     for (int lineCounter = 0; lineCounter <= grid.rows; lineCounter++) {
         for (int columnCounter = 0; columnCounter <= grid.cols; columnCounter++) {
@@ -61,7 +64,7 @@ void initializeGrid() {
                 printf("%c", 191);
             }
             else if (lineCounter == grid.rows && columnCounter == 0) {
-                printf("%4c", 192);
+                printf("%6c", 192);
                 printf("%c", 196);
                 printf("%c", 196);
                 printf("%c", 196);
@@ -70,7 +73,7 @@ void initializeGrid() {
                 printf("%c", 217);
             }
             else if (lineCounter == 0 && columnCounter == 0) {
-                printf("%4c", 218);
+                printf("%6c", 218);
                 printf("%c", 196);
                 printf("%c", 196);
                 printf("%c", 196);
@@ -91,7 +94,7 @@ void initializeGrid() {
                 printf("%c", 180);
             }
             else if (columnCounter == 0) {
-                printf("%4c", 195);
+                printf("%6c", 195);
                 printf("%c", 196);
                 printf("%c", 196);
                 printf("%c", 196);
@@ -108,7 +111,8 @@ void initializeGrid() {
             for (size_t i = 0; i < grid.cols; i++)
             {
                 if (i == 0) {
-                    printf("%4c", 179); // Vertical line
+                    lineCounter+1 < 10 ? printf("%c%i%3c", 255, lineCounter+1, 255) : printf("%c%i%2c", 255, lineCounter+1, 255);
+                    printf("%c", 179); // Vertical line
                     printf("%c", 255);
 
                     // Print value here
