@@ -1,8 +1,11 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 
 // Function declarations
-void initializeGrid();
-void insertValuesInGrid();
+void printGrid(struct Matrix grid);
+void initializeGrid(struct Matrix* grid);
+void insertValueInMatrix(struct Matrix* grid, char value, int row, int column);
 
 // Variable/Constants declarations
 
@@ -10,49 +13,56 @@ void insertValuesInGrid();
 struct Matrix {
     int rows;
     int cols;
+    char data[17][26];
 };
 
 int main() {
-
-    initializeGrid(); // Initialize the game grid
-
-    return 0;
-}
-
-void insertValuesInGrid() {
-    // Function to insert values into the game grid (currently empty)
-}
-
-// Function definitions
-void initializeGrid() {
     struct Matrix grid = { 17, 26 }; // <-- Adjust the size of the game grid
+    initializeGrid(&grid);
 
-    // Define the game grid with ASCII characters
-    char testArray[17][26][1] = {
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","S","E","N","D","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","H","E","L","P","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","P","L","E","A","S","E","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","","","",""},
-        {"","","","","","","","","","","","","","","","","","","","","","","A","A","A","A"},
-    };
+    int flag = 1;
 
     // Accessing row and column information
     printf("Game Grid Information\n");
     printf("Rows: %d\n", grid.rows);
     printf("Cols: %d\n", grid.cols);
     printf("\n");
+
+    while (flag != 0) {
+        printGrid(grid); // Initialize the game grid
+
+        int row, column;
+        char value;
+        printf("\nChoose a value to insert: ");
+        scanf(" %c", &value);
+        printf("Row number: ");
+        scanf("%i", &row);
+        printf("Column number: ");
+        scanf("%i", &column);
+
+        insertValueInMatrix(&grid, value, row, column);
+
+        printf("\n------------------------------------------------------------------------------------------------------------------\n\n");
+    }
+
+    return 0;
+}
+
+void insertValueInMatrix(struct Matrix* grid, char value, int row, int column) {
+    // Function to insert values into the game grid matrix
+    grid->data[row-1][column-1] = value;
+}
+
+void initializeGrid(struct Matrix* grid) {
+    for (int i = 0; i < grid->rows; i++) {
+        for (int j = 0; j < grid->cols; j++) {
+            grid->data[i][j] = 0;
+        }
+    }
+}
+
+// Function definitions
+void printGrid(struct Matrix grid) {
 
     // Print column indicators
     printf("%7cA   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z\n", 255);
@@ -116,11 +126,11 @@ void initializeGrid() {
                     printf("%c", 255);
 
                     // Print value here
-                    if (testArray[lineCounter][i][0] == 0) {
+                    if (grid.data[lineCounter][i] == 0) {
                         printf("%c", 255);
                     }
                     else {
-                        printf("%c", testArray[lineCounter][i][0]);
+                        printf("%c", grid.data[lineCounter][i]);
                     }
                     // Print value here
 
@@ -131,11 +141,11 @@ void initializeGrid() {
                     printf("%c", 255);
 
                     // Print value here
-                    if (testArray[lineCounter][i][0] == 0) {
+                    if (grid.data[lineCounter][i] == 0) {
                         printf("%c", 255);
                     }
                     else {
-                        printf("%c", testArray[lineCounter][i][0]);
+                        printf("%c", grid.data[lineCounter][i]);
                     }
                     // Print value here
 
@@ -147,11 +157,11 @@ void initializeGrid() {
                     printf("%c", 255);
 
                     // Print value here
-                    if (testArray[lineCounter][i][0] == 0) {
+                    if (grid.data[lineCounter][i] == 0) {
                         printf("%c", 255);
                     }
                     else {
-                        printf("%c", testArray[lineCounter][i][0]);
+                        printf("%c", grid.data[lineCounter][i]);
                     }
                     // Print value here
 
@@ -159,7 +169,7 @@ void initializeGrid() {
                 }    
             }
             printf("\n");
-
         }
     }
+    printf("\n");
 }
