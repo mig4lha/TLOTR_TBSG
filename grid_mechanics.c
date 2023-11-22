@@ -19,7 +19,7 @@ struct Matrix {
     char data[ROWS][COLS];
 };
 
-int main() {
+/*int main() {
     struct Matrix grid = { ROWS, COLS }; // <-- Adjust the size of the game grid
     initializeGrid(&grid);
 
@@ -51,7 +51,7 @@ int main() {
     }
 
     return 0;
-}
+}*/
 
 char capitalizeChar(char c) {
     return (char)toupper((unsigned char)c);
