@@ -1,57 +1,9 @@
+//grid_mechanics.c
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <ctype.h>
-
-// Variable/Constants declarations
-#define ROWS 17
-#define COLS 26
-
-// Function declarations
-void printGrid(struct Matrix grid);
-void initializeGrid(struct Matrix* grid);
-int insertValueInMatrix(struct Matrix* grid, char value, int row, char column);
-
-// Define the Matrix to be used to create the game grid
-struct Matrix {
-    int rows;
-    int cols;
-    char data[ROWS][COLS];
-};
-
-int main() {
-    struct Matrix grid = { ROWS, COLS }; // <-- Adjust the size of the game grid
-    initializeGrid(&grid);
-
-    int flag = 1;
-
-    // Accessing row and column information
-    printf("Game Grid Information\n");
-    printf("Rows: %d\n", grid.rows);
-    printf("Cols: %d\n", grid.cols);
-    printf("\n");
-
-    while (flag != 0) {
-        printGrid(grid); // Initialize the game grid
-
-        int row, check;
-        char value, column;
-        printf("\nChoose a value to place: ");
-        scanf(" %c", &value);   
-        printf("Choose coordinates for the unit (ex. A1): ");
-        scanf(" %c", &column, 1);
-        scanf("%i", &row);
-
-        check = insertValueInMatrix(&grid, value, row, column);
-        if (check == 0) {
-            printf("\n -> Error: There is already a unit occupying that cell!\n");
-        }
-
-        printf("\n------------------------------------------------------------------------------------------------------------------\n\n");
-    }
-
-    return 0;
-}
+#include "grid_mechanics.h"  // Header file
 
 char capitalizeChar(char c) {
     return (char)toupper((unsigned char)c);
