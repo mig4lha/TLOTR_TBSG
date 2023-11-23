@@ -3,8 +3,8 @@
 #define GRID_MECHANICS_H
 
 // Variable/Constants declarations
-#define ROWS 3
-#define COLS 3
+#define ROWS 17
+#define COLS 26
 
 // Define the Matrix to be used to create the game grid
 struct Matrix {

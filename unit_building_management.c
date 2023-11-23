@@ -1,6 +1,27 @@
 // unit_management.c
 #include "unit_building_management.h"
 
+// Array of string representations for each enum UnitType value
+const char* unitTypeNames[NUM_UNIT_TYPES] = {
+    "Infantry",
+    "Cavalry",
+    "Artillery"
+};
+
+// Array of string representations for each enum Faction value
+const char* factionNames[NUM_FACTIONS] = {
+    "Gondor",
+    "Mordor"
+};
+
+const char* buildingTypeNames[NUM_BUILDING_TYPES] = {
+    "Base",
+    "Mine",
+    "Barrack",
+    "Stable",
+    "Armoury"
+};
+
 // Array of string representations (letter codes) for each unit type for each Faction
 const char* unitTypeCodes[NUM_UNIT_TYPES * NUM_FACTIONS] = {
     // Gondor/Rivendell Units
@@ -10,7 +31,7 @@ const char* unitTypeCodes[NUM_UNIT_TYPES * NUM_FACTIONS] = {
     // Mordor Units
     "OW",   // Infantry (Orc Warriors)
     "W",    // Cavalry (Wargs)
-    "ST",   // Artillery (Siege Towers)
+    "ST"    // Artillery (Siege Towers)
 };
 
 // Array of string representations (letter codes) for each building type for each Faction
@@ -26,7 +47,7 @@ const char* buildingsTypeCodes[NUM_BUILDING_TYPES * NUM_FACTIONS] = {
     "EE",       // Mines (Erebor)
     "II",       // Barracks (Isengard)
     "MK",       // Stables (Mirkwood)
-    "DF",       // Armoury (Dark Forge)
+    "DF"        // Armoury (Dark Forge)
 };
 
 // Function to initialize units with their letter codes for a faction
@@ -51,12 +72,96 @@ void initializeFactionBuildings(struct FactionBuildings* factionBuildings, enum 
 
 // Function to initialize a unit with its properties
 void initializeUnit(struct Unit* unit, enum UnitType unitType, const struct FactionUnits* factionUnits) {
-    unit->unit_type = unitType;
-    unit->attack_power = 1;
-    unit->health_points = 1;
-    unit->movement_costs = 1;
-    unit->unit_cost = 1;
-    strcpy(unit->unit_code, factionUnits->unitTypeCodes[unitType]);
+    switch (factionUnits->faction)
+    {
+        case GONDOR:
+            switch (unitType)
+            {
+                case INFANTRY:
+                    unit->faction = factionUnits->faction;
+                    strcpy(unit->unit_faction_desc, factionNames[factionUnits->faction]);
+                    unit->unit_type = unitType;
+                    unit->attack_power = 5;
+                    unit->health_points = 30;
+                    unit->movement_costs = 2;   // Coins per Cell
+                    unit->unit_cost = 10;
+                    strcpy(unit->unit_code, factionUnits->unitTypeCodes[unitType]);
+                    break;
+                case CAVALRY:
+                    unit->faction = factionUnits->faction;
+                    strcpy(unit->unit_faction_desc, factionNames[factionUnits->faction]);
+                    strcpy(unit->unit_type_desc, unitTypeNames[unitType]);
+                    unit->unit_type = unitType;
+                    unit->attack_power = 7;
+                    unit->health_points = 40;
+                    unit->movement_costs = 1;   // Coins per Cell
+                    unit->unit_cost = 15;
+                    strcpy(unit->unit_code, factionUnits->unitTypeCodes[unitType]);
+                    break;
+                case ARTILLERY:
+                    unit->faction = factionUnits->faction;
+                    strcpy(unit->unit_faction_desc, factionNames[factionUnits->faction]);
+                    strcpy(unit->unit_type_desc, unitTypeNames[unitType]);
+                    unit->unit_type = unitType;
+                    unit->attack_power = 10;
+                    unit->health_points = 20;
+                    unit->movement_costs = 3;   // Coins per Cell
+                    unit->unit_cost = 20;
+                    strcpy(unit->unit_code, factionUnits->unitTypeCodes[unitType]);
+                    break;
+                default:
+                    // An unexpected error occured
+                    exit(0);
+                    break;
+            }
+            break;
+        case MORDOR:
+            switch (unitType)
+            {
+                case INFANTRY:
+                    unit->faction = factionUnits->faction;
+                    strcpy(unit->unit_faction_desc, factionNames[factionUnits->faction]);
+                    strcpy(unit->unit_type_desc, unitTypeNames[unitType]);
+                    unit->unit_type = unitType;
+                    unit->attack_power = 5;
+                    unit->health_points = 30;
+                    unit->movement_costs = 2;   // Coins per Cell
+                    unit->unit_cost = 10;
+                    strcpy(unit->unit_code, factionUnits->unitTypeCodes[unitType]);
+                    break;
+                case CAVALRY:
+                    unit->faction = factionUnits->faction;
+                    strcpy(unit->unit_faction_desc, factionNames[factionUnits->faction]);
+                    strcpy(unit->unit_type_desc, unitTypeNames[unitType]);
+                    unit->unit_type = unitType;
+                    unit->attack_power = 7;
+                    unit->health_points = 40;
+                    unit->movement_costs = 1;   // Coins per Cell
+                    unit->unit_cost = 15;
+                    strcpy(unit->unit_code, factionUnits->unitTypeCodes[unitType]);
+                    break;
+                case ARTILLERY:
+                    unit->faction = factionUnits->faction;
+                    strcpy(unit->unit_faction_desc, factionNames[factionUnits->faction]);
+                    strcpy(unit->unit_type_desc, unitTypeNames[unitType]);
+                    unit->unit_type = unitType;
+                    unit->attack_power = 10;
+                    unit->health_points = 20;
+                    unit->movement_costs = 3;   // Coins per Cell
+                    unit->unit_cost = 20;
+                    strcpy(unit->unit_code, factionUnits->unitTypeCodes[unitType]);
+                    break;
+                default:
+                    // An unexpected error occured
+                    exit(0);
+                    break;
+            }
+            break;
+        default:
+            // An unexpected error occured
+            exit(0);
+            break;
+    }
 }
 
 // Function to initialize a building with its properties
@@ -129,6 +234,16 @@ void initializeAllUnitsAndBuildings() {
     printf("Gondor Barrack Unit Code: %s\n", gondorBarrack.building_code);
     printf("Gondor Stable Unit Code: %s\n", gondorStable.building_code);
     printf("Gondor Armoury Unit Code: %s\n", gondorArmoury.building_code);
+
+    // Display information on a unit type (debugging prints)
+    printf("\n");
+    printf("Unit Faction: %s\n", mordorArtillery.unit_faction_desc);
+    printf("Unit Type: %s\n", mordorArtillery.unit_type_desc);
+    printf("Unit Attack Power: %i\n", mordorArtillery.attack_power);
+    printf("Unit Health Points: %i HP\n", mordorArtillery.health_points);
+    printf("Unit Movement Cost: %i coins/cell\n", mordorArtillery.movement_costs);
+    printf("Unit Cost: %i coins\n", mordorArtillery.unit_cost);
+    printf("Unit Code: %s\n", mordorArtillery.unit_code);
     printf("\n\n");
 }
 

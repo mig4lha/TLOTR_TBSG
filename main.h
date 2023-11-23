@@ -5,6 +5,6 @@
 // Function declarations
 void gameLoop();
 
-// Global variables
+// Global variables if needed
 
 #endif
