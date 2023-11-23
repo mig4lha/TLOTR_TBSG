@@ -5,6 +5,9 @@
 #define MAX_UNIT_CODE_SIZE 3
 #define MAX_BUILDING_CODE_SIZE 5
 
+// Mine Building Set Income Value
+#define MINE_INCOME 5
+
 // Enum defining the factions
 enum Faction {
     GONDOR,

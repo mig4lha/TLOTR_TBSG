@@ -9,26 +9,13 @@ char capitalizeChar(char c) {
     return (char)toupper((unsigned char)c);
 }
 
-int letterToInt(char letter) {
-    letter = capitalizeChar(letter);
-    if (letter >= 'A' && letter <= 'Z') {
-        return letter - 'A' + 1;
-    }
-}
-
-char intToLetter(int position) {
-    if (position >= 1 && position <= 26) {
-        return 'A' + position - 1;
-    }
-}
-
 int insertValueInMatrix(struct Matrix* grid, char value, int row, char column) {
     // Function to insert values into the game grid matrix
     value = capitalizeChar(value);
 
     int columnInt;
 
-    columnInt = letterToInt(column);
+    columnInt = capitalizeChar(column) - 'A' + 1;
 
     if (grid->data[row - 1][columnInt - 1] != NULL) {
         return 0;
@@ -55,7 +42,7 @@ void printGrid(struct Matrix grid) {
     char letter;
     for (size_t i = 0; i < grid.cols; i++)
     {
-        letter = intToLetter(i + 1);
+        letter = 'A' + i;
         if (i == 0) {
             printf("%7c%c", 255, letter);
         }
