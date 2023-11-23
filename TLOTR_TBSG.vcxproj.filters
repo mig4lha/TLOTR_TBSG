@@ -21,7 +21,7 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="unit_management.c">
+    <ClCompile Include="unit_building_management.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,7 +32,7 @@
     <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="unit_management.h">
+    <ClInclude Include="unit_building_management.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
