@@ -84,7 +84,7 @@ void initializeAllUnitsAndBuildings() {
     struct Building mordorBase, mordorMine, mordorBarrack, mordorStable, mordorArmoury;
     struct Building gondorBase, gondorMine, gondorBarrack, gondorStable, gondorArmoury;
 
-    // Define units and buildings with their properties
+    // Define units and buildings with their properties (placeholder values)
 
     // Mordor units
     initializeUnit(&mordorInfantry, INFANTRY, &mordorUnits);
@@ -108,7 +108,7 @@ void initializeAllUnitsAndBuildings() {
     initializeBuilding(&gondorStable, STABLE, &gondorBuildings);
     initializeBuilding(&gondorArmoury, ARMOURY, &gondorBuildings);
 
-    // Display the letter code for each unit and building by faction
+    // Display the letter code for each unit and building by faction (debugging prints)
     printf("Game Unit and Building Information:\n");
     printf("Mordor Infantry Unit Code: %s\n", mordorInfantry.unit_code);
     printf("Mordor Cavalry Unit Code: %s\n", mordorCavalry.unit_code);
