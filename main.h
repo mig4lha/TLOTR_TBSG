@@ -4,6 +4,9 @@
 
 // Function declarations
 void gameLoop();
+void MainMenu();
+void Title();
+void Submenu();
 
 // Global variables if needed
 
