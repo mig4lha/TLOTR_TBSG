@@ -128,6 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="grid_mechanics.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="unit_building_management.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="grid_mechanics.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="unit_building_management.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

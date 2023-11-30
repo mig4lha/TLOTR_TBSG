@@ -1,73 +1,12 @@
+//grid_mechanics.c
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <ctype.h>
-
-// Variable/Constants declarations
-#define ROWS 17
-#define COLS 26
-
-// Function declarations
-void printGrid(struct Matrix grid);
-void initializeGrid(struct Matrix* grid);
-int insertValueInMatrix(struct Matrix* grid, char value, int row, char column);
-
-// Define the Matrix to be used to create the game grid
-struct Matrix {
-    int rows;
-    int cols;
-    char data[ROWS][COLS];
-};
-
-int main() {
-    struct Matrix grid = { ROWS, COLS }; // <-- Adjust the size of the game grid
-    initializeGrid(&grid);
-
-    int flag = 1;
-
-    // Accessing row and column information
-    printf("Game Grid Information\n");
-    printf("Rows: %d\n", grid.rows);
-    printf("Cols: %d\n", grid.cols);
-    printf("\n");
-
-    while (flag != 0) {
-        printGrid(grid); // Initialize the game grid
-
-        int row, check;
-        char value, column;
-        printf("\nChoose a value to place: ");
-        scanf(" %c", &value);   
-        printf("Choose coordinates for the unit (ex. A1): ");
-        scanf(" %c", &column, 1);
-        scanf("%i", &row);
-
-        check = insertValueInMatrix(&grid, value, row, column);
-        if (check == 0) {
-            printf("\n -> Error: There is already a unit occupying that cell!\n");
-        }
-
-        printf("\n------------------------------------------------------------------------------------------------------------------\n\n");
-    }
-
-    return 0;
-}
+#include "grid_mechanics.h"  // Header file
 
 char capitalizeChar(char c) {
     return (char)toupper((unsigned char)c);
-}
-
-int letterToInt(char letter) {
-    letter = capitalizeChar(letter);
-    if (letter >= 'A' && letter <= 'Z') {
-        return letter - 'A' + 1;
-    }
-}
-
-char intToLetter(int position) {
-    if (position >= 1 && position <= 26) {
-        return 'A' + position - 1;
-    }
 }
 
 int insertValueInMatrix(struct Matrix* grid, char value, int row, char column) {
@@ -76,7 +15,7 @@ int insertValueInMatrix(struct Matrix* grid, char value, int row, char column) {
 
     int columnInt;
 
-    columnInt = letterToInt(column);
+    columnInt = capitalizeChar(column) - 'A' + 1;
 
     if (grid->data[row - 1][columnInt - 1] != NULL) {
         return 0;
@@ -103,7 +42,7 @@ void printGrid(struct Matrix grid) {
     char letter;
     for (size_t i = 0; i < grid.cols; i++)
     {
-        letter = intToLetter(i + 1);
+        letter = 'A' + i;
         if (i == 0) {
             printf("%7c%c", 255, letter);
         }
