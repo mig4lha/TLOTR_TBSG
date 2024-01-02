@@ -6,6 +6,7 @@
 #include "main.h"
 #include "grid_mechanics.h"
 #include "unit_building_management.h"
+#include "player_management.h"
 
 int main() {
 	MainMenu();
@@ -60,6 +61,7 @@ void MainMenu() {
 void Submenu() {
 	int choice = 0;
 	while (1) {
+		system("cls");
 		printf("\n\n%2c1) Solo\n", 255);
 		printf("%2c2) Pass'n'Play\n", 255);
 		printf("%2c3) Back\n", 255);
@@ -96,36 +98,120 @@ void gameLoop() {
 
     initializeGrid(&grid);
     initializeAllUnitsAndBuildings();
+	// Initialize players
+	struct Player player1, player2;
 
-    int flag = 1;
+	// Ask Player 1 for their chosen faction
+	int chosenFaction;
+	printf("Player 1, choose your faction (0 for MORDOR, 1 for GONDOR): ");
+	scanf("%d", &chosenFaction);
 
-    while (flag != 0) {
+	// Ensure a valid faction choice
+	chosenFaction = (chosenFaction == MORDOR) ? MORDOR : GONDOR;
+
+	// Initialize players based on faction choices
+	initializePlayer(&player1, chosenFaction, 1);
+	initializePlayer(&player2, (chosenFaction == MORDOR) ? GONDOR : MORDOR, 2);
+
+	// Game loop
+	int gameRunning = 1;
+	int turnCounter = 1;
+	struct Player* currentPlayer = &player1;
+
+    while (gameRunning != 0) {
 		system("cls");
 		printf("\n\n");
+
+		printf("Turn %d\n\n", turnCounter);
+		
+		// Perform actions for the current player's turn
+		displayPlayer(currentPlayer);
+
+		printf("\n\n");
+
         printGrid(grid); // Initialize the game grid
 
         int row, check;
         char value, column;
 		char quit[20];
 
-        printf("\nChoose a value to place ('Quit' to go to the Main Menu): ");
-        scanf("%s", &quit);
-		if (strcmp(quit, "Quit") == 0) {
-			system("cls");
-			MainMenu();
-		}
-		else {
-			value = quit[0];
-		}
+		int action = 0;
+		action = performPlayerTurn(); 
 
-        printf("Choose coordinates for the unit (ex. A1): ");
-        scanf(" %c", &column, 1);
-        scanf("%i", &row);
+		switch (action) {
+		case 1:
+			// Implement logic for placing a unit
 
-        check = insertValueInMatrix(&grid, value, row, column);
-        if (check == 0) {
-            printf("\n -> Error: There is already a unit occupying that cell!\n");
-        }
+			printf("\nChoose a value to place ('Quit' to go to the Main Menu): ");
+			scanf("%s", &quit);
+			if (strcmp(quit, "Quit") == 0) {
+				system("cls");
+				MainMenu();
+			}
+			else {
+				value = quit[0];
+			}
+
+			printf("Choose coordinates for the unit (ex. A1): ");
+			scanf(" %c", &column, 1);
+			scanf("%i", &row);
+
+			check = insertValueInMatrix(&grid, value, row, column);
+			if (check == 0) {
+				printf("\n -> Error: There is already a unit occupying that cell!\n");
+			}
+			break;
+		case 2:
+			// Implement logic for placing a building
+
+			printf("\nChoose a value to place ('Quit' to go to the Main Menu): ");
+			scanf("%s", &quit);
+			if (strcmp(quit, "Quit") == 0) {
+				system("cls");
+				MainMenu();
+			}
+			else {
+				value = quit[0];
+			}
+
+			printf("Choose coordinates for the unit (ex. A1): ");
+			scanf(" %c", &column, 1);
+			scanf("%i", &row);
+
+			check = insertValueInMatrix(&grid, value, row, column);
+			if (check == 0) {
+				printf("\n -> Error: There is already a unit occupying that cell!\n");
+			}
+			break;
+		case 3:
+			// Implement logic for moving a unit
+			printf("Moving Unit\n");
+			break;
+		case 4:
+			// Implement logic for moving a building
+			printf("Moving Building\n");
+			break;
+		case 5:
+			// End the player's turn
+			// Ask the player if they want to end their turn
+			printf("\nDo you really want to end your turn? (1 for yes, 0 for no): ");
+			int endTurn;
+			scanf("%d", &endTurn);
+
+			if (endTurn) {
+				// Switch to the other player for the next turn
+				currentPlayer = (currentPlayer == &player1) ? &player2 : &player1;
+
+				// Check if both players have ended their turns
+				if (currentPlayer == &player1) {
+					turnCounter++;
+				}
+			}
+			break;
+		default:
+			printf("Invalid option\n");
+			break;
+		}
 
         printf("\n------------------------------------------------------------------------------------------------------------------\n\n");
     }
